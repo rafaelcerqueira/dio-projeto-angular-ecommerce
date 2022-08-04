@@ -1,3 +1,4 @@
+import { BookService } from './product-list.component.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor() { }
+  livros: any;
+
+  bookService: BookService;
+
+  constructor(bookService: BookService) {
+
+    this.bookService = bookService;
+
+  }
 
   ngOnInit(): void {
+
+    this.livros = this.bookService.getBook().subscribe((data => {
+      this.livros = data;
+      console.log(this.livros);
+    }))
+
   }
 
 }
